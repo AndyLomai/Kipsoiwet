@@ -91,6 +91,35 @@ Use `/advance win` or `/advance loss` for each candle. The bot will:
 - carry cumulative losses forward until a win, then restart stake sizing
 - start whenever you initiate the first trade, then progress in 5-minute steps from that first trade onward until your sequence ends
 
+
+## Run on your PC (quick start)
+
+After downloading/cloning, run these exact commands:
+
+### Windows (PowerShell)
+
+```powershell
+cd Kipsoiwet
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -e '.[dev]'
+$env:TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN'
+python -m kipsoiwet_bot
+```
+
+### macOS / Linux
+
+```bash
+cd Kipsoiwet
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -e '.[dev]'
+export TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN'
+python -m kipsoiwet_bot
+```
+
+If you set variables in `.env`, you can skip the `export/$env:` line and just run `python -m kipsoiwet_bot`.
+
 ## Project structure
 
 - `src/kipsoiwet_bot/martingale.py` — martingale math + state transitions

@@ -29,6 +29,25 @@ BET_WINDOW_SECONDS=3.0
 INITIAL_SIDE=UP
 DRY_RUN=true
 
+
+## Run on a PC (direct)
+
+### Windows (PowerShell)
+cd Kipsoiwet
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -e '.[dev]'
+$env:TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN'
+python -m kipsoiwet_bot
+
+### macOS / Linux
+cd Kipsoiwet
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -e '.[dev]'
+export TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN'
+python -m kipsoiwet_bot
+
 ## Run and Test
 - Run tests:
   PYTHONPATH=src python -m pytest -q
