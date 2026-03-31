@@ -96,14 +96,14 @@ Use `/advance win` or `/advance loss` for each candle. The bot will:
 
 After downloading/cloning, run these exact commands:
 
-### Windows (PowerShell)
+### Windows (Command Prompt / cmd)
 
-```powershell
+```bat
 cd Kipsoiwet
 py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.venv\Scripts\activate.bat
 pip install -e '.[dev]'
-$env:TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN'
+set TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN
 python -m kipsoiwet_bot
 ```
 

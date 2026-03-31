@@ -32,12 +32,12 @@ DRY_RUN=true
 
 ## Run on a PC (direct)
 
-### Windows (PowerShell)
+### Windows (Command Prompt / cmd)
 cd Kipsoiwet
 py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.venv\Scripts\activate.bat
 pip install -e '.[dev]'
-$env:TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN'
+set TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN
 python -m kipsoiwet_bot
 
 ### macOS / Linux

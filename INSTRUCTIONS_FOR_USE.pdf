@@ -3,7 +3,7 @@
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
 2 0 obj
-<< /Length 2602 >>
+<< /Length 2606 >>
 stream
 BT
 /F1 11 Tf
@@ -41,12 +41,12 @@ BT
 1 0 0 1 50 308 Tm () Tj
 1 0 0 1 50 294 Tm (## Run on a PC \(direct\)) Tj
 1 0 0 1 50 280 Tm () Tj
-1 0 0 1 50 266 Tm (### Windows \(PowerShell\)) Tj
+1 0 0 1 50 266 Tm (### Windows \(Command Prompt / cmd\)) Tj
 1 0 0 1 50 252 Tm (cd Kipsoiwet) Tj
 1 0 0 1 50 238 Tm (py -3.11 -m venv .venv) Tj
-1 0 0 1 50 224 Tm (.\\.venv\\Scripts\\Activate.ps1) Tj
+1 0 0 1 50 224 Tm (.venv\\Scripts\\activate.bat) Tj
 1 0 0 1 50 210 Tm (pip install -e '.[dev]') Tj
-1 0 0 1 50 196 Tm ($env:TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN') Tj
+1 0 0 1 50 196 Tm (set TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN) Tj
 1 0 0 1 50 182 Tm (python -m kipsoiwet_bot) Tj
 1 0 0 1 50 168 Tm () Tj
 1 0 0 1 50 154 Tm (### macOS / Linux) Tj
@@ -115,13 +115,13 @@ xref
 0000000000 65535 f 
 0000000009 00000 n 
 0000000079 00000 n 
-0000002733 00000 n 
-0000004435 00000 n 
-0000004498 00000 n 
-0000004624 00000 n 
-0000004750 00000 n 
+0000002737 00000 n 
+0000004439 00000 n 
+0000004502 00000 n 
+0000004628 00000 n 
+0000004754 00000 n 
 trailer
 << /Size 8 /Root 7 0 R >>
 startxref
-4799
+4803
 %%EOF
