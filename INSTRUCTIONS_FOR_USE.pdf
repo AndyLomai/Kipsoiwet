@@ -1,0 +1,108 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2575 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 742 Tm (# Kipsoiwet Bot Instructions \(Consolidated\)) Tj
+1 0 0 1 50 728 Tm () Tj
+1 0 0 1 50 714 Tm (## Trading Method Rules) Tj
+1 0 0 1 50 700 Tm (- Use Polymarket price model: odds = 1 / price.) Tj
+1 0 0 1 50 686 Tm (- Profit multiplier for stake sizing: \(1 / p\) - 1.) Tj
+1 0 0 1 50 672 Tm (- Martingale stake formula:) Tj
+1 0 0 1 50 658 Tm (  stake = \(cumulative_losses + target_profit\) / \(\(1 / p\) - 1\)) Tj
+1 0 0 1 50 644 Tm (- Default target profit per completed cycle: 1 USD.) Tj
+1 0 0 1 50 630 Tm (- Bet execution window: within first 3 seconds of candle \(latency-tolerant\).) Tj
+1 0 0 1 50 616 Tm (- If a round loses, cumulative losses are added and next stake is recalculated.) Tj
+1 0 0 1 50 602 Tm (- Keep trading using the predetermined sequence until a win.) Tj
+1 0 0 1 50 588 Tm (- After a win, cumulative losses reset and stake sizing restarts from the base formula.) Tj
+1 0 0 1 50 574 Tm () Tj
+1 0 0 1 50 560 Tm (## Setup) Tj
+1 0 0 1 50 546 Tm (1. Clone repository:) Tj
+1 0 0 1 50 532 Tm (   git clone https://github.com/AndyLomai/Kipsoiwet.git) Tj
+1 0 0 1 50 518 Tm (   cd Kipsoiwet) Tj
+1 0 0 1 50 504 Tm (2. Create virtual environment:) Tj
+1 0 0 1 50 490 Tm (   python3.11 -m venv .venv) Tj
+1 0 0 1 50 476 Tm (   source .venv/bin/activate) Tj
+1 0 0 1 50 462 Tm (3. Install dependencies:) Tj
+1 0 0 1 50 448 Tm (   pip install -e '.[dev]') Tj
+1 0 0 1 50 434 Tm () Tj
+1 0 0 1 50 420 Tm (## Environment Configuration \(.env\)) Tj
+1 0 0 1 50 406 Tm (TELEGRAM_BOT_TOKEN=your_bot_token) Tj
+1 0 0 1 50 392 Tm (POLYMARKET_EVENT_SLUG=bitcoin-up-or-down-march-31-11am-et) Tj
+1 0 0 1 50 378 Tm (TARGET_PROFIT_USD=1.0) Tj
+1 0 0 1 50 364 Tm (BET_WINDOW_SECONDS=3.0) Tj
+1 0 0 1 50 350 Tm (INITIAL_SIDE=UP) Tj
+1 0 0 1 50 336 Tm (DRY_RUN=true) Tj
+1 0 0 1 50 322 Tm () Tj
+1 0 0 1 50 308 Tm (## Run and Test) Tj
+1 0 0 1 50 294 Tm (- Run tests:) Tj
+1 0 0 1 50 280 Tm (  PYTHONPATH=src python -m pytest -q) Tj
+1 0 0 1 50 266 Tm (- Start bot:) Tj
+1 0 0 1 50 252 Tm (  python -m kipsoiwet_bot) Tj
+1 0 0 1 50 238 Tm () Tj
+1 0 0 1 50 224 Tm (## Telegram Commands) Tj
+1 0 0 1 50 210 Tm (- /start) Tj
+1 0 0 1 50 196 Tm (- /status) Tj
+1 0 0 1 50 182 Tm (- /next) Tj
+1 0 0 1 50 168 Tm (- /won) Tj
+1 0 0 1 50 154 Tm (- /lost) Tj
+1 0 0 1 50 140 Tm (- /reset) Tj
+1 0 0 1 50 126 Tm () Tj
+1 0 0 1 50 112 Tm () Tj
+1 0 0 1 50 98 Tm (## Predetermined Full-Day Sequence Mode) Tj
+1 0 0 1 50 84 Tm (- Prepare `SEQUENCE_FILE` with ordered outcomes \(`UP`/`DOWN`\) from the first trade onward. It) Tj
+1 0 0 1 50 70 Tm (can be one day or multi-week/month length.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 853 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 742 Tm (- Add to `.env`: `SEQUENCE_FILE=./data/day_sequence.txt`) Tj
+1 0 0 1 50 728 Tm (- In Telegram use:) Tj
+1 0 0 1 50 714 Tm (  - `/daystatus` to view current slot and remaining outcomes) Tj
+1 0 0 1 50 700 Tm (  - `/advance win` or `/advance loss` to settle the next candle according to the predetermined) Tj
+1 0 0 1 50 686 Tm (sequence) Tj
+1 0 0 1 50 672 Tm (- The first trade is always forced to `UP` when sequence mode starts.) Tj
+1 0 0 1 50 658 Tm () Tj
+1 0 0 1 50 644 Tm (## Notes) Tj
+1 0 0 1 50 630 Tm (- Keep DRY_RUN=true initially.) Tj
+1 0 0 1 50 616 Tm (- If market snapshot arrives after BET_WINDOW_SECONDS, skip candle.) Tj
+1 0 0 1 50 602 Tm (- Add risk controls before live execution: max drawdown, max streak, cooldown.) Tj
+1 0 0 1 50 588 Tm (- No maximum stake cap is enforced by default in this version.) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Pages /Kids [5 0 R 6 0 R] /Count 2 >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 4 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 4 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+7 0 obj
+<< /Type /Catalog /Pages 4 0 R >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000002706 00000 n 
+0000003610 00000 n 
+0000003673 00000 n 
+0000003799 00000 n 
+0000003925 00000 n 
+trailer
+<< /Size 8 /Root 7 0 R >>
+startxref
+3974
+%%EOF
