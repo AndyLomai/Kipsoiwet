@@ -28,7 +28,7 @@ BT
 1 0 0 1 50 490 Tm (   python3.11 -m venv .venv) Tj
 1 0 0 1 50 476 Tm (   source .venv/bin/activate) Tj
 1 0 0 1 50 462 Tm (3. Install dependencies:) Tj
-1 0 0 1 50 448 Tm (   pip install -e '.[dev]') Tj
+1 0 0 1 50 448 Tm (   pip install -e ".[dev]") Tj
 1 0 0 1 50 434 Tm () Tj
 1 0 0 1 50 420 Tm (## Environment Configuration \(.env\)) Tj
 1 0 0 1 50 406 Tm (TELEGRAM_BOT_TOKEN=your_bot_token) Tj
@@ -45,7 +45,7 @@ BT
 1 0 0 1 50 252 Tm (cd Kipsoiwet) Tj
 1 0 0 1 50 238 Tm (py -3.11 -m venv .venv) Tj
 1 0 0 1 50 224 Tm (.venv\\Scripts\\activate.bat) Tj
-1 0 0 1 50 210 Tm (pip install -e '.[dev]') Tj
+1 0 0 1 50 210 Tm (pip install -e ".[dev]") Tj
 1 0 0 1 50 196 Tm (set TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN) Tj
 1 0 0 1 50 182 Tm (python -m kipsoiwet_bot) Tj
 1 0 0 1 50 168 Tm () Tj
@@ -53,7 +53,7 @@ BT
 1 0 0 1 50 140 Tm (cd Kipsoiwet) Tj
 1 0 0 1 50 126 Tm (python3.11 -m venv .venv) Tj
 1 0 0 1 50 112 Tm (source .venv/bin/activate) Tj
-1 0 0 1 50 98 Tm (pip install -e '.[dev]') Tj
+1 0 0 1 50 98 Tm (pip install -e ".[dev]") Tj
 1 0 0 1 50 84 Tm (export TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN') Tj
 1 0 0 1 50 70 Tm (python -m kipsoiwet_bot) Tj
 ET

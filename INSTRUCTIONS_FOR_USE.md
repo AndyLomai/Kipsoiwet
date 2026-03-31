@@ -19,7 +19,7 @@
    python3.11 -m venv .venv
    source .venv/bin/activate
 3. Install dependencies:
-   pip install -e '.[dev]'
+   pip install -e ".[dev]"
 
 ## Environment Configuration (.env)
 TELEGRAM_BOT_TOKEN=your_bot_token
@@ -36,7 +36,7 @@ DRY_RUN=true
 cd Kipsoiwet
 py -3.11 -m venv .venv
 .venv\Scripts\activate.bat
-pip install -e '.[dev]'
+pip install -e ".[dev]"
 set TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN
 python -m kipsoiwet_bot
 
@@ -44,7 +44,7 @@ python -m kipsoiwet_bot
 cd Kipsoiwet
 python3.11 -m venv .venv
 source .venv/bin/activate
-pip install -e '.[dev]'
+pip install -e ".[dev]"
 export TELEGRAM_BOT_TOKEN='YOUR_BOT_TOKEN'
 python -m kipsoiwet_bot
 
