@@ -21,6 +21,7 @@ class BotConfig:
     bet_window_seconds: float = 3.0
     dry_run: bool = True
     sequence_file: str = ""
+    session_log_file: str = "logs/paper_session.csv"
 
     @classmethod
     def from_env(cls) -> "BotConfig":
@@ -35,4 +36,5 @@ class BotConfig:
             bet_window_seconds=float(os.getenv("BET_WINDOW_SECONDS", "3.0")),
             dry_run=os.getenv("DRY_RUN", "true").lower() == "true",
             sequence_file=os.getenv("SEQUENCE_FILE", ""),
+            session_log_file=os.getenv("SESSION_LOG_FILE", "logs/paper_session.csv"),
         )

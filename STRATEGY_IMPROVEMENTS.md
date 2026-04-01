@@ -32,3 +32,6 @@ Based on your instructions and attached documents, this implementation applies:
 
 6. **Predetermined full-day sequence support**
    - Bot can now follow a fixed or extended UP/DOWN sequence starting at the user-initiated first trade time and continuing for as many candles as provided using `SEQUENCE_FILE` and `/advance`.
+
+7. **Paper-session CSV logging**
+   - Bot now records `next/won/lost/advance` actions to a CSV log file for 5-hour dry-run analysis.

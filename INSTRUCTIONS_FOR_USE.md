@@ -76,3 +76,9 @@ python -m kipsoiwet_bot
 - If market snapshot arrives after BET_WINDOW_SECONDS, skip candle.
 - Add risk controls before live execution: max drawdown, max streak, cooldown.
 - No maximum stake cap is enforced by default in this version.
+
+
+## Paper session logging
+
+Every `/next`, `/won`, `/lost`, and `/advance` action is appended to a CSV session log.
+Use `/logfile` in Telegram to see the active path.

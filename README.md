@@ -38,6 +38,7 @@ After starting the bot in Telegram:
 - `/reset` — clear progression state
 - `/daystatus` — show full-day predetermined-sequence progress
 - `/advance` — settle the next 5-minute candle from the predefined UP/DOWN sequence
+- `/logfile` — show where paper-session CSV logs are being saved
 
 ## Setup
 
@@ -59,6 +60,7 @@ BET_WINDOW_SECONDS=3.0
 INITIAL_SIDE=UP
 DRY_RUN=true
 SEQUENCE_FILE=./data/day_sequence.txt
+SESSION_LOG_FILE=logs/paper_session.csv
 ```
 
 ### 3) Run
@@ -74,6 +76,7 @@ If your UP/DOWN results are predetermined, add:
 
 ```env
 SEQUENCE_FILE=./data/day_sequence.txt
+SESSION_LOG_FILE=logs/paper_session.csv
 ```
 
 Then create `data/day_sequence.txt` containing `UP` or `DOWN` tokens in order, separated by spaces/newlines/commas. The file can be any length (single day, several weeks, or months).
