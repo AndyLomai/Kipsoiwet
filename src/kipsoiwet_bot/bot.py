@@ -6,9 +6,10 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-from telegram import Update
+from telegram import ReplyKeyboardMarkup, Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
+from .backtest import parse_backtest_rows, run_backtest
 from .config import BotConfig
 from .day_sequence import PredeterminedDay, load_outcomes
 from .martingale import MartingaleEngine, Side
@@ -41,12 +42,39 @@ def _log(state: BotState, **kwargs: object) -> None:
         state.session_logger.write(**kwargs)
 
 
+def _main_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        [["/next", "/status", "/won", "/lost"], ["/daystatus", "/advance win", "/advance loss"], ["/testrun", "/backtest", "/logfile"]],
+        resize_keyboard=True,
+    )
+
+
+async def menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(
+        "Menu ready. Use buttons for quick actions.\n"
+        "Backtest format: SIDE:RESULT tokens, e.g. UP:W DOWN:L",
+        reply_markup=_main_keyboard(),
+    )
+
+
+async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(
+        "Commands:\n"
+        "/menu - show interactive keyboard\n"
+        "/next /won /lost /status /reset\n"
+        "/testrun [rounds] [winrate] -> quick Monte-Carlo-like dry simulation\n"
+        "/backtest <file_path> -> run deterministic backtest from SIDE:RESULT sequence\n"
+        "/logfile -> show CSV log path"
+    )
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     state = _state(context)
     await update.message.reply_text(
         "Kipsoiwet bot ready.\n"
         f"Target profit: ${state.config.target_profit_usd:.2f}\n"
-        f"Bet window: first {state.config.bet_window_seconds:.1f}s"
+        f"Bet window: first {state.config.bet_window_seconds:.1f}s",
+        reply_markup=_main_keyboard(),
     )
 
 
@@ -156,6 +184,51 @@ async def advance(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     )
 
 
+async def testrun(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    state = _state(context)
+    rounds = int(context.args[0]) if context.args else 60
+    winrate = float(context.args[1]) if len(context.args) > 1 else 0.5
+
+    engine = MartingaleEngine(target_profit_usd=state.config.target_profit_usd, initial_side=Side.UP)
+    wins = 0
+    losses = 0
+    for i in range(rounds):
+        side = Side.UP if i % 2 == 0 else Side.DOWN
+        engine.set_side(side)
+        price = 0.57 if side == Side.UP else 0.44
+        won = (i / max(rounds, 1)) < winrate
+        if won:
+            wins += 1
+        else:
+            losses += 1
+        engine.record_round(side=side, price=price, won=won)
+
+    await update.message.reply_text(
+        f"Test run complete\nRounds: {rounds}\nWins: {wins}\nLosses: {losses}\nNet PnL: ${engine.cumulative_pnl_usd:.2f}"
+    )
+
+
+async def backtest(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    state = _state(context)
+    if not context.args:
+        await update.message.reply_text("Usage: /backtest <path_to_sequence_file>")
+        return
+
+    path = " ".join(context.args)
+    try:
+        rows = parse_backtest_rows(path)
+        summary = run_backtest(rows, up_price=0.57, down_price=0.44, target_profit_usd=state.config.target_profit_usd)
+    except Exception as exc:
+        await update.message.reply_text(f"Backtest error: {exc}")
+        return
+
+    await update.message.reply_text(
+        "Backtest summary\n"
+        f"Rounds: {summary.rounds}\nWins: {summary.wins}\nLosses: {summary.losses}\n"
+        f"Net PnL: ${summary.net_pnl_usd:.2f}\nMax drawdown: ${summary.max_drawdown_usd:.2f}\nPeak stake: ${summary.peak_stake_usd:.2f}"
+    )
+
+
 async def logfile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     state = _state(context)
     if state.session_logger:
@@ -182,6 +255,8 @@ def build_app() -> Application:
     app.bot_data["state"] = BotState(engine=engine, market=market, config=config, day_sequence=day_sequence, session_logger=session_logger)
 
     app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("menu", menu))
+    app.add_handler(CommandHandler("help", help_cmd))
     app.add_handler(CommandHandler("status", status))
     app.add_handler(CommandHandler("next", next_bet))
     app.add_handler(CommandHandler("won", won))
@@ -189,6 +264,8 @@ def build_app() -> Application:
     app.add_handler(CommandHandler("reset", reset))
     app.add_handler(CommandHandler("daystatus", day_status))
     app.add_handler(CommandHandler("advance", advance))
+    app.add_handler(CommandHandler("testrun", testrun))
+    app.add_handler(CommandHandler("backtest", backtest))
     app.add_handler(CommandHandler("logfile", logfile))
     return app
 

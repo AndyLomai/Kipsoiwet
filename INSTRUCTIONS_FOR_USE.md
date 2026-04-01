@@ -82,3 +82,14 @@ python -m kipsoiwet_bot
 
 Every `/next`, `/won`, `/lost`, and `/advance` action is appended to a CSV session log.
 Use `/logfile` in Telegram to see the active path.
+
+
+## Backtest input format
+
+Create a text file with tokens like:
+
+```text
+UP:W DOWN:L UP:WIN DOWN:LOSS
+```
+
+Then run `/backtest <path_to_file>` in Telegram.

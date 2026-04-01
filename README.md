@@ -39,6 +39,9 @@ After starting the bot in Telegram:
 - `/daystatus` — show full-day predetermined-sequence progress
 - `/advance` — settle the next 5-minute candle from the predefined UP/DOWN sequence
 - `/logfile` — show where paper-session CSV logs are being saved
+- `/menu` — show Telegram keyboard shortcuts
+- `/testrun [rounds] [winrate]` — run a quick synthetic dry simulation
+- `/backtest <path>` — run deterministic backtest from `SIDE:RESULT` rows
 
 ## Setup
 
@@ -143,3 +146,14 @@ When you upload your latest full-day progression document, extend this bot by:
 4. Wiring authenticated order execution only after dry-run metrics are stable.
 
 If you want, the next step can be a **backtest script** that reads your real progression file and outputs a full equity curve under this exact `$1 target / 3 second window` configuration.
+
+
+## Backtest input format
+
+Create a text file with tokens like:
+
+```text
+UP:W DOWN:L UP:WIN DOWN:LOSS
+```
+
+Then run `/backtest <path_to_file>` in Telegram.

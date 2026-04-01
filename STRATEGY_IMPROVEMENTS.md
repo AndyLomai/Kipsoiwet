@@ -35,3 +35,6 @@ Based on your instructions and attached documents, this implementation applies:
 
 7. **Paper-session CSV logging**
    - Bot now records `next/won/lost/advance` actions to a CSV log file for 5-hour dry-run analysis.
+
+8. **UI and backtesting expansion**
+   - Added Telegram menu keyboard plus `/testrun` and `/backtest` to support richer paper testing workflows.
